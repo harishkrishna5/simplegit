@@ -1,0 +1,47 @@
+Q.2) Implement Persistent Volumes (PV) and Persistent Volume Claims (PVC) in Kubernetes
+
+Setup and Deploy a Sample Application: 
+
+Create a namespace called storage-demo. 
+
+Deploy a sample application (e.g., Webserver) in the storage-demo namespace. Use the following specifications: 
+
+Deployment name: my-deployment 
+
+Image: nginx:latest 
+
+Replicas: 2 
+
+Expose the deployment using a service named service on port 80. 
+
+Create a Persistent Volume (PV): 
+
+Define a Persistent Volume with the following specifications: 
+
+Name: my-pv 
+
+Capacity: 2Gi 
+
+Access Modes: ReadWriteOnce 
+
+Host Path: /mnt/data 
+
+Create a Persistent Volume Claim (PVC): 
+
+Define a Persistent Volume Claim with the following specifications: 
+
+Name: nginx-pvc 
+
+Access Modes: ReadWriteOnce 
+
+Storage Request: 2Gi 
+
+Modify the Deployment to Use the PVC: 
+
+Update the my-deployment to use the nginx-pvc for storing data. Mount the PVC to the path /usr/share/nginx/html in the container. 
+
+Verify the Configuration: 
+
+Ensure that the Persistent Volume and Persistent Volume Claim are bound. 
+
+Verify that the Nginx application is using the persistent storage by creating a test file in the mounted directory and checking its persistence across pod restarts. 
