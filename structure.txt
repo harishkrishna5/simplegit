@@ -1,0 +1,28 @@
+serverless-hello-world/
+├── terraform/
+│   ├── main.tf
+│   ├── modules/
+│   │   ├── lambda/
+│   │   │   ├── main.tf
+│   │   │   ├── variables.tf
+│   │   │   ├── outputs.tf
+│   │   ├── api_gateway/
+│   │   │   ├── main.tf
+│   │   │   ├── variables.tf
+│   │   │   ├── outputs.tf
+│   │   ├── cognito/
+│   │   │   ├── main.tf
+│   │   │   ├── variables.tf
+│   │   │   ├── outputs.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   ├── provider.tf
+├── lambda/
+│   ├── index.js
+│   ├── package.json
+├── .github/
+│   ├── workflows/
+│   │   ├── deploy.yml
+├── README.md
+```
+
