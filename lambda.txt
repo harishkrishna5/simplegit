@@ -1,0 +1,38 @@
+provider "aws" {
+  region = "ap-south-1"
+}
+
+# IAM Role for Lambda Execution
+resource "aws_iam_role" "lambda_role" {
+  name = "lambda-execution-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "lambda.amazonaws.com"
+      }
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_policy" {
+  role       = aws_iam_role.lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+# Lambda Function Without S3
+resource "aws_lambda_function" "my_lambda" {
+  function_name = "my-lambda-function"
+  role          = aws_iam_role.lambda_role.arn
+  handler       = "index.handler"
+  runtime       = "nodejs18.x"
+  timeout       = 10
+
+  filename         = "/workspaces/web-app-demo/apps/lambda/lambda.zip"  # Reference the local file
+  source_code_hash = filebase64sha256("/workspaces/web-app-demo/apps/lambda/lambda.zip") # Ensures updates trigger redeployment
+
+}
+
